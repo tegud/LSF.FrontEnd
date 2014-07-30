@@ -32,9 +32,9 @@ fieldset { border:none; }
 
 /* my flights */
 .containerMyFlights { width:990px; height:400px; margin:0 auto; background:url("../images/bg.jpg") 0 -140px no-repeat ; }
-.containerMyFlights form { margin:3px 0 0 0; padding:65px 0 0 0; } 
-.containerMyFlights input { width:300px; padding:10px; margin:10px 0 10px 10px; font-weight:normal; }
-#buttonGo { width:320px; padding:10px; margin:10px; font-size:27px; color:#FFF; font-weight:100; border:none; background-color:#8dc63f; border-radius:5px; }
-#firstname { font-size:14px; border:none; border-radius:5px;}
+.containerMyFlights form { margin:3px 0 0 0; padding:105px 0 0 20px; } 
+.containerMyFlights input { width:300px; padding:10px; margin:10px 0 10px 10px; font-weight:normal; box-shadow: 0 0 10px #FFF; }
+.buttonGo { width:320px !important; padding:10px; margin:10px; font-size:27px; color:#FFF; font-weight:100; border:none; background-color:#8dc63f; border-radius:5px; }
+.firstname { font-size:14px; border:none; border-radius:5px;}
 #lastname { font-size:14px; border:none; border-radius:5px;}
 #email { font-size:14px; font-weight:normal; border:none; border-radius:5px;}
