@@ -40,7 +40,7 @@ var destination_hauls = {
             {{price}}
         </div>
         <div class="destInfo">
-            <button class="watchButton">watch</button>
+            <button class="watchButton"><a href="myflights.html?flightid={{flightid}}">watch</a></button>
         </div>
     </div>
 {{/results}}
@@ -132,7 +132,8 @@ console.log(params);
                     arrival_date: moment(h.arrival_date).format('DD MMM YYYY HH:mm'),
                     nights: h.nights,
                     seats_remaining: h.seats_remaining,
-                    price: ~~destination_hauls[h.destination_airport.code]
+                    price: ~~destination_hauls[h.destination_airport.code],
+                    flightid: hits[hit]._id
                 });
              }
              templateShizzle(results);

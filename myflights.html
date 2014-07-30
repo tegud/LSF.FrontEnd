@@ -4,20 +4,57 @@
 <title>My Flights</title>
 <meta charset='utf-8'>
 <meta content='noindex, nofollow' name='robots'>
-<link rel="stylesheet" type="text/css" href="assets/css/style.css" /> 
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+<script src="assets/js/elasticsearch.js"></script>
+<script type="text/javascript">
+	
+        var params = {};
+        var qs = window.location.search.substring(1).split(/&/);
+        for (var i in qs) {
+            var m = qs[i].split(/=/);
+            params[m[0]] = m[1];
+        }
+console.log(params);
+
+function init() {
+//	alert("init");
+	document.getElementById("flightid").value = params.flightid;
+}
+
+function add_watch() {
+//	alert("gah");
+	      var client = new elasticsearch.Client({
+          host: '10.44.35.21:9200',
+          log: 'trace'
+        });
+client.create({
+  index: 'lateseats',
+  type: 'watchlist',
+  body: {
+  	"name": document.getElementById("name").value,
+            "email": document.getElementById("email").value,
+            "id": document.getElementById("flightid").value
+
+  }
+}, function (error, response) {
+  console.log(error);
+});
+//alert("another gah");
+return false;
+}
+</script>
 </head> 
-<body id="profile"> 
+<body id="profile" onload="init()"> 
 	<div id="main">
     <header class="header"><nav><h1>LateSeats Finder</h1></nav></header>
     <div class="containerMyFlights">
-<form action="" method="">
-<input class="inputs" id="firstname" type="text" name="firstname" placeholder="first name">
-<br/>
-<input class="inputs" id="lastname" type="text" name="lastname" placeholder="last name">
+<form action="#" method="GET" onsubmit="return add_watch();">
+<input class="inputs" id="name" type="text" name="firstname" placeholder="name">
 <br/>
 <input class="inputs" id="email" type="text" name="email" placeholder="enter your email address">
 <br/>
-<button id="buttonGo">GO</button>
+<input id="button" type="submit" value="GO">
+<input id="flightid" name="flightid" type="hidden">
 </form>
 </div>
 </div>
