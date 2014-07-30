@@ -3,6 +3,17 @@
 <head>
     <script src="assets/js/elasticsearch.js" type="text/javascript"></script>
     <script src="assets/js/mustache.js" type="text/javascript"></script>
+    <script src="assets/js/moment.js" type="text/javascript"></script>
+    <script type="text/javascript">
+var flight_hauls = {
+    short: 40,
+    mid: 60
+};
+        
+var destination_hauls = {
+    AYT: flight_hauls.mid
+};
+    </script>
     <script id="template" type="x-tmpl-mustache">
     {{#results}}
     <div class="result-row">
@@ -14,19 +25,19 @@
             {{destination_airport}}
         </div>
         <div class="destInfo">
-            
+            {{arrival_date}}
         </div>
         <div class="destInfo">
-            
+            {{departure_date}}
         </div>
         <div class="destInfo">
-            
+            {{nights}}
         </div>
         <div class="destInfo">
-            
+            {{seats_remaining}}
         </div>
         <div class="destInfo">
-            
+            {{price}}
         </div>
         <div class="destInfo">
             <button class="watchButton">watch</button>
@@ -35,7 +46,15 @@
 {{/results}}
     </script>
     <script type="text/javascript">
-
+var flight_hauls = {
+    short: 40,
+    mid: 60
+};
+        
+var destination_hauls = {
+    AYT: 60
+};
+        console.log(destination_hauls);
         var params = {};
         var qs = window.location.search.substring(1).split(/&/);
         for (var i in qs) {
@@ -105,7 +124,16 @@ console.log(params);
              var results = {results:[]};
              for (hit in hits) {
                  if (!hits.hasOwnProperty(hit)) continue;
-                results.results.push({departure_airport: hits[hit]._source.departure_airport.name,destination_airport: hits[hit]._source.destination_airport.name});
+                 var h = hits[hit]._source;
+                results.results.push({
+                    departure_airport: h.departure_airport.name,
+                    destination_airport: h.destination_airport.name,
+                    departure_date: moment(h.departure_date).format('DD MMM YYYY HH:mm'),
+                    arrival_date: moment(h.arrival_date).format('DD MMM YYYY HH:mm'),
+                    nights: h.nights,
+                    seats_remaining: h.seats_remaining,
+                    price: ~~destination_hauls[h.destination_airport.code]
+                });
              }
              templateShizzle(results);
         }, function (err) {
@@ -127,7 +155,7 @@ console.log(params);
 </head>
 <body id="searchresults">
     <div id="main">
-    <header class="header"></header>
+    <header class="header"><nav><h1>LateSeats Finder</h1></nav></header>
         <div class="contanierSearchRsults">
             <section class="searchheader">
                 <div class="box">from</div>
