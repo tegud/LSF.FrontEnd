@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>LateSeats Finder</title>
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body id="home">
+<div id="main">
+    <header class="header"></header>
+    <div class="container">
+    <section class="search">
+        <div class="searchBox">
+            <form id="app-login" action="searchresults.html" method="GET">
+            <fieldset>
+            <select id="departureap" name="departure_airport">
+                  <option value="" selected>Where do you want to fly from</option>
+                    <option value="ABZ">Aberdeen (ABZ)</option>
+                    <option value="BHD">Belfast City (BHD)</option>
+                    <option value="BFS">Belfast International (BFS)</option>
+                    <option value="BHX">Birmingham (BHX)</option>
+                    <option value="BOH">Bournemouth (BOH)</option>
+                    <option value="BRS">Bristol (BRS)</option>
+                    <option value="CWL">Cardiff (CWL)</option>
+                    <option value="LDY">City of Derry (LDY)</option>
+                    <option value="DSA">Doncaster Sheffield (DSA)</option>
+                    <option value="DUB">Dublin (DUB)</option>
+                    <option value="MME">Durham Tees Valley (MME)</option>
+                    <option value="EMA">East Midlands (EMA)</option>
+                    <option value="EDI">Edinburgh (EDI)</option>
+                    <option value="EXT">Exeter (EXT)</option>
+                    <option value="GLA">Glasgow (GLA)</option>
+                    <option value="LBA">Leeds Bradford (LBA)</option>
+                    <option value="LGW">London Gatwick (LGW)</option>
+                    <option value="LTN">London Luton (LTN)</option>
+                    <option value="SEN">London Southend (SEN)</option>
+                    <option value="STN">London Stansted (STN)</option>
+                    <option value="MAN">Manchester (MAN)</option>
+                    <option value="NCL">Newcastle (NCL)</option>
+                    <option value="NWI">Norwich (NWI)</option>
+                    <option value="SNN">Shannon (SNN)</option>
+                    <option value="SOU">Southampton (SOU)</option>
+            </select>
+                  <select id="destAP" name="destination_airport" required="true" requiredempty="none">
+                    <option selected="selected" value="none">Where do you want to fly to
+                    </option>
+                    <option value="AGA">Agadir (AGA)</option>
+                    <option value="ALC">Alicante (ALC)</option>
+                    <option value="LEI">Almeria (LEI)</option>
+                    <option value="GPA">Araxos (GPA)</option>
+                    <option value="AUA">Aruba (AUA)</option>
+                    <option value="BHD">Belfast City (BHD)</option>
+                    <option value="BFS">Belfast International (BFS)</option>
+                    <option value="BOJ">Bulgaria, Bourgas (BOJ)</option>
+                    <option value="BVC">Cape Verde, Boa Vista (BVC)</option>
+                    <option value="SID">Cape Verde, Sal (SID)</option>
+                    <option value="CHQ">Chania (CHQ)</option>
+                    <option value="CFU">Corfu (CFU)</option>
+                    <option value="PUY">Croatia, Pula (PUY)</option>
+                    <option value="POP">Dom. Rep., Puerto Plata (POP)</option>
+                    <option value="PUJ">Dom. Rep., Punta Cana (PUJ)</option>
+                    <option value="DBV">Dubrovnik (DBV)</option>
+                    <option value="HRG">Egypt, Hurghada (HRG)</option>
+                    <option value="LXR">Egypt, Luxor (LXR)</option>
+                    <option value="RMF">Egypt, Marsa Alam (RMF)</option>
+                    <option value="SSH">Egypt, Sharm El Sheikh (SSH)</option>
+                    <option value="FAO">Faro (FAO)</option>
+                    <option value="FUE">Fuerteventura (FUE)</option>
+                    <option value="FNC">Funchal (FNC)</option>
+                    <option value="GRO">Gerona (GRO)</option>
+                    <option value="LPA">Gran Canaria (LPA)</option>
+                    <option value="HER">Heraklion (HER)</option>
+                    <option value="IBZ">Ibiza (IBZ)</option>
+                    <option value="MBJ">Jamaica, Montego Bay (MBJ)</option>
+                    <option value="XRY">Jerez (XRY)</option>
+                    <option value="KVA">Kavala (KVA)</option>
+                    <option value="EFL">Kefalonia (EFL)</option>
+                    <option value="MBA">Kenya, Mombasa (MBA)</option>
+                    <option value="KGS">Kos (KGS)</option>
+                    <option value="SPC">La Palma (SPC)</option>
+                    <option value="ACE">Lanzarote (ACE)</option>
+                    <option value="LCA">Larnaca (LCA)</option>
+                    <option value="LGW">London Gatwick (LGW)</option>
+                    <option value="LTN">London Luton (LTN)</option>
+                    <option value="SEN">London Southend (SEN)</option>
+                    <option value="STN">London Stansted (STN)</option>
+                    <option value="AGP">Malaga (AGP)</option>
+                    <option value="MLA">Malta (MLA)</option>
+                    <option value="RAK">Marrakech (RAK)</option>
+                    <option value="MRU">Mauritius (MRU)</option>
+                    <option value="MAH">Menorca (MAH)</option>
+                    <option value="CUN">Mexico, Cancun (CUN)</option>
+                    <option value="PVR">Mexico, Puerto Vallarta (PVR)</option>
+                    <option value="JMK">Mykonos (JMK)</option>
+                    <option value="NAP">Naples (NAP)</option>
+                    <option value="PMI">Palma Mallorca (PMI)</option>
+                    <option value="PFO">Paphos (PFO)</option>
+                    <option value="PXO">Porto Santo (PXO)</option>
+                    <option value="PVK">Preveza (PVK)</option>
+                    <option value="REU">Reus (REU)</option>
+                    <option value="RHO">Rhodes (RHO)</option>
+                    <option value="SMI">Samos (SMI)</option>
+                    <option value="JTR">Santorini (JTR)</option>
+                    <option value="AHO">Sardinia, Alghero (AHO)</option>
+                    <option value="CTA">Sicily, Catania (CTA)</option>
+                    <option value="JSI">Skiathos (JSI)</option>
+                    <option value="TFS">Tenerife South (TFS)</option>
+                    <option value="SKG">Thessaloniki (SKG)</option>
+                    <option value="DJE">Tunisia, Djerba (DJE)</option>
+                    <option value="NBE">Tunisia, Enfidha (NBE)</option>
+                    <option value="ADB">Turkey, Adnan Menderes (ADB)</option>
+                    <option value="AYT">Turkey, Antalya (AYT)</option>
+                    <option value="BJV">Turkey, Bodrum (BJV)</option>
+                    <option value="DLM">Turkey, Dalaman (DLM)</option>
+                    <option value="VCE">Venice (VCE)</option>
+                    <option value="ZTH">Zante (ZTH)</option>
+                    </select>
+            </select>
+                <select id="from" name="departuredate">
+                  <option value="" selected>When do you want to go</option>
+                    <option value="Mr">30th July 2014</option>
+                  <option value="Other">Other</option>
+            </select>
+                <select id="from" name="returndate">
+                  <option value="" selected>When do you want to come back</option>
+                    <option value="Mr">6th August 2014</option>
+                  <option value="Other">Other</option>
+            </select>
+              <button>Search</button>
+            </div>
+            </fieldset>
+            </form>
+        </div>    
+    </section>
+    <section class="footerText"><h1>Welcome to LateSeats Finder</h1></section>    
+    </div>    
+</div>
+</body>
+</html>

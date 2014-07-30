@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="assets/js/elasticsearch.js" type="text/javascript"></script>
+    <script src="assets/js/mustache.js" type="text/javascript"></script>
+    <script id="template" type="x-tmpl-mustache">
+    {{#results}}
+    <div class="result-row">
+        <div class="destInfo">
+            {{departure_airport}}
+        </div>
+
+        <div class="destInfo">
+            {{destination_airport}}
+        </div>
+        <div class="destInfo">
+            
+        </div>
+        <div class="destInfo">
+            
+        </div>
+        <div class="destInfo">
+            
+        </div>
+        <div class="destInfo">
+            
+        </div>
+        <div class="destInfo">
+            
+        </div>
+        <div class="destInfo">
+            <button class="watchButton">watch</button>
+        </div>
+    </div>
+{{/results}}
+    </script>
+    <script type="text/javascript">
+
+        var params = {};
+        var qs = window.location.search.substring(1).split(/&/);
+        for (var i in qs) {
+            var m = qs[i].split(/=/);
+            params[m[0]] = m[1];
+        }
+console.log(params);
+
+        var client = new elasticsearch.Client({
+          host: '10.44.35.21:9200',
+          log: 'trace'
+        });
+
+        var query = {
+                "filtered": {
+                  "filter": {
+                    "bool": {
+                      "must": []
+                    }
+                  }
+                }
+             };
+        
+        if (params.departure_airport) {
+            query.filtered.filter.bool.must.push(
+                        {
+                            "term": {
+                                "departure_airport.code.raw": params.departure_airport
+                            }
+                        }
+            );
+        }
+        
+        if (params.destination_airport) {
+            query.filtered.filter.bool.must.push(
+                        {
+                            "term": {
+                                "destination_airport.code.raw": params.destination_airport
+                            }
+                        }
+            );
+        }
+        /*
+                        {
+                            "term": {
+                                "departure_airport.code.raw": "MAN"
+                            }
+                        },
+                        {
+                            "term": {"destination_airport.code.raw":"PMI"}
+                        }
+                      */
+        
+        if (query.filtered.filter.bool.must.length == 0) {
+            query = {};
+        }
+        
+         client.search({
+          index: 'lateseats',
+          type: 'flight',
+             body: {
+                 query: query
+          }
+        }).then(function (resp) {
+            var hits = resp.hits.hits;
+             console.log(hits);
+             var results = {results:[]};
+             for (hit in hits) {
+                 if (!hits.hasOwnProperty(hit)) continue;
+                results.results.push({departure_airport: hits[hit]._source.departure_airport.name,destination_airport: hits[hit]._source.destination_airport.name});
+             }
+             templateShizzle(results);
+        }, function (err) {
+            console.trace(err.message);
+        });
+        
+        function templateShizzle(data) {
+            var template = document.getElementById("template").innerHTML;
+            Mustache.parse(template);
+            var rendered = Mustache.render(template, data);
+            document.getElementById("results").innerHTML = rendered;
+        }
+
+    </script>
+<meta charset="utf-8" />
+<title>LateSeats Search Results</title>
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+</head>
+<body id="searchresults">
+    <div id="main">
+    <header class="header"></header>
+        <div class="contanierSearchRsults">
+            <section class="searchheader">
+                <div class="box">from</div>
+                <div class="box">to</div>
+                <div class="box">outbound</div>
+                <div class="box">inbound</div>
+                <div class="box">nights</div>
+                <div class="box">No of seats</div>
+                <div class="box">price</div>
+                <div class="box boxLarge">watch this flight</div>
+            </section>
+            <section class="resultsrows">
+                <div id="results" class="resultsrow"></div>
+            </section>
+        <div>
+    </div>    
+</body>
+</html>
