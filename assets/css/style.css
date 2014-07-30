@@ -28,3 +28,10 @@ fieldset { border:none; }
 
 .result-row:nth-child(even)	{ padding:10px 0;  background-color:#f8f8f9; border-bottom:2px solid #f2f2f3; }
 .watchButton { padding:10px; font-size:16px; color:#FFF; font-weight:100; border:none; background-color:#8dc63f; border-radius:5px; }
+
+/* my flights */
+
+#button { width:150px; padding:10px; font-size:27px; color:#FFF; font-weight:100; border:none; background-color:#8dc63f; border-radius:5px; }
+#firstname {width:150px; font-size:16px; border:none; border-radius:15px;}
+#lastname {width:150px; font-size:16px; border:none; border-radius:15px;}
+#email {width:150px; font-size:16px; border:none; border-radius:15px;}
