@@ -52,7 +52,8 @@ var flight_hauls = {
 };
         
 var destination_hauls = {
-    AYT: 60
+    AYT: 60,
+    PMI: 40
 };
         console.log(destination_hauls);
         var params = {};
@@ -72,7 +73,13 @@ console.log(params);
                 "filtered": {
                   "filter": {
                     "bool": {
-                      "must": []
+                      "must": [
+                      	{
+                      		"range": {
+                      			"seats_remaining": { "gte": 1 } 
+                      		}	
+                      	}
+                      ]
                     }
                   }
                 }
@@ -116,7 +123,11 @@ console.log(params);
           index: 'lateseats',
           type: 'flight',
              body: {
-                 query: query
+                 query: query,
+                 "size": 1000,
+                 "sort" : [
+        					{ "seats_remaining" : {"order" : "asc"}} 
+      					]
           }
         }).then(function (resp) {
             var hits = resp.hits.hits;
