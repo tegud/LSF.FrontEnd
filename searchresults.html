@@ -70,23 +70,31 @@ console.log(params);
         });
 
         var query = {
-                "filtered": {
-                  "filter": {
-                    "bool": {
-                      "must": [
-                      	{
-                      		"range": {
-                      			"seats_remaining": { "gte": 1 } 
-                      		}	
-                      	}
-                      ]
-                    }
-                  }
-                }
-             };
+			   "filtered":{
+			      "filter":{
+			         "and":[
+			            {
+			               "range":{
+			                  "seats_remaining":{
+			                     "gte":1
+			                  }
+			               }
+			            },
+			            {
+			               "range":{
+			                  "arrival_date":{
+			                     "gte":"now",
+			                     "lt":"now+"+params.days+"d"
+			                  }
+			               }
+			            }
+			         ]
+			      }
+			   }
+			};
         
         if (params.departure_airport) {
-            query.filtered.filter.bool.must.push(
+            query.filtered.filter.and.push(
                         {
                             "term": {
                                 "departure_airport.code.raw": params.departure_airport
@@ -96,7 +104,7 @@ console.log(params);
         }
         
         if (params.destination_airport) {
-            query.filtered.filter.bool.must.push(
+            query.filtered.filter.and.push(
                         {
                             "term": {
                                 "destination_airport.code.raw": params.destination_airport
@@ -115,7 +123,7 @@ console.log(params);
                         }
                       */
         
-        if (query.filtered.filter.bool.must.length == 0) {
+        if (query.filtered.filter.and.length == 0) {
             query = {};
         }
         
@@ -126,7 +134,7 @@ console.log(params);
                  query: query,
                  "size": 1000,
                  "sort" : [
-        					{ "seats_remaining" : {"order" : "asc"}} 
+        					{ "arrival_date" : {"order" : "asc"}} 
       					]
           }
         }).then(function (resp) {
