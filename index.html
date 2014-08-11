@@ -16,8 +16,8 @@
         <div class="searchBox">
             <form id="app-login" action="searchresults.html" method="GET">
             <fieldset>
-            <select id="departureap" name="departure_airport">
-                  <option value="" selected>Where do you want to fly from</option>
+            <select id="departureap" name="departure_airport" required="true">
+                  <option value="" selected>Going from...</option>
                     <option value="ABZ">Aberdeen (ABZ)</option>
                     <option value="BHD">Belfast City (BHD)</option>
                     <option value="BFS">Belfast International (BFS)</option>
@@ -44,10 +44,9 @@
                     <option value="SNN">Shannon (SNN)</option>
                     <option value="SOU">Southampton (SOU)</option>
             </select>
-                  <select id="destAP" name="destination_airport" required="true" requiredempty="none">
-                    <option selected="selected" value="none">Where do you want to fly to
+                  <select id="destAP" name="destination_airport" required="false" requiredempty="ANYWHERE">
+                    <option selected="selected" value="ANYWHERE">Going to... (optional)
                     </option>
-					<option value="">Anywhere, just get me out of here!</option>
                     <option value="AGA">Agadir (AGA)</option>
                     <option value="ALC">Alicante (ALC)</option>
                     <option value="LEI">Almeria (LEI)</option>
@@ -132,8 +131,12 @@
             </form>
         </div>    
     </section>
-    <section class="footerText"><h2>Welcome to LateSeats Finder</h2></section>    
+    <section class="footerText"><h2>Welcome to LateSeats Finder</h2> </section>
+	<div style="position:fixed; bottom:0; right: 0" id="mailto">    
+		</div>
     </div>    
 </div>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="mailto.js"></script>
 </body>
 </html>

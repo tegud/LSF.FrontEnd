@@ -177,7 +177,7 @@ console.log(params);
             );
         }
         
-        if (params.destination_airport) {
+        if (params.destination_airport && params.destination_airport != "ANYWHERE") {
             query.filtered.filter.and.push(
                         {
                             "term": {
@@ -266,5 +266,9 @@ console.log(params);
             </section>
         <div>
     </div>    
+	<div style="position:fixed; bottom:0; right: 0" id="mailto">    
+		</div>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="mailto.js"></script>
 </body>
 </html>
