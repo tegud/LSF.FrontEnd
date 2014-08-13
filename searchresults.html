@@ -231,6 +231,7 @@ console.log(params);
              }
              templateShizzle(results);
         }, function (err) {
+				alert("Could not read flight data.  Please try again later.");
             console.trace(err.message);
         });
         

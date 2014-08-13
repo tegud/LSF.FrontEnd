@@ -6,6 +6,7 @@
 <meta content='noindex, nofollow' name='robots'>
 <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 <script src="assets/js/elasticsearch.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
 	
         var params = {};
@@ -22,11 +23,13 @@ function init() {
 }
 
 function add_watch() {
+$("body").css("cursor", "progress");
 //	alert("gah");
 	      var client = new elasticsearch.Client({
           host: '10.44.35.21:9200',
           log: 'trace'
         });
+
 client.create({
   index: 'lateseats',
   type: 'watchlist',
@@ -37,11 +40,21 @@ client.create({
 
   }
 }, function (error, response) {
-  console.log(error);
+$("body").css("cursor", "default");
+	if(error != undefined){
+      alert("Failed to add watch.  Please try again later.");
+	}
+	else{
+		alert("We've recorded your watch for this flight.");
+	}
+	
 });
 //alert("another gah");
 return false;
+
+
 }
+
 </script>
 </head> 
 <body id="profile" onload="init()"> 
@@ -60,7 +73,6 @@ return false;
 </div>
 	<div style="position:fixed; bottom:0; right: 0" id="mailto">    
 		</div>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="mailto.js"></script>
 </body>
 </html>
